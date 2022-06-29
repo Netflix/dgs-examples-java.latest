@@ -23,16 +23,14 @@ plugins {
 
 apply(plugin = "io.spring.dependency-management")
 
-java.sourceCompatibility = JavaVersion.VERSION_16
-
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
-// If you use Spring Boot Gradle Plugin 2.3.+ you will have to explicitly set the Kotlin Version to 1.4.+.
-// The plugin will downgrade Kotlin to its 1.3.x version, which is not compatible.
-// You do this by setting the version into the `extra["kotlin.version"]` e.g:
-//
-// extra["kotlin.version"] = "1.4.31"
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
 
 repositories {
     mavenCentral()
@@ -58,12 +56,6 @@ tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
     typeMapping = mutableMapOf("DateRange" to "com.example.demo.scalars.DateRange")
 }
 
-tasks.withType<JavaCompile> {
-    java {
-        targetCompatibility = JavaVersion.VERSION_16
-        sourceCompatibility = JavaVersion.VERSION_16
-    }
-}
 
 tasks.withType<Test> {
     useJUnitPlatform()
