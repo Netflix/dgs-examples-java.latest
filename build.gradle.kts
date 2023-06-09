@@ -17,7 +17,7 @@
 
 plugins {
     id("java")
-    id("com.netflix.dgs.codegen") version "5.2.1"
+    id("com.netflix.dgs.codegen") version "5.11.1"
     id("org.springframework.boot") version "2.6.6"
 }
 
@@ -51,7 +51,6 @@ dependencies {
 }
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
-    generateClient = true
     packageName = "com.example.demo.generated"
     typeMapping = mutableMapOf("DateRange" to "com.example.demo.scalars.DateRange")
 }
